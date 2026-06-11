@@ -607,7 +607,7 @@ function renderCard(s) {
     ? `<div class="timer-row${urgent?" timer-urgent":""}">⏳ <span>${fmtTime(remaining)}</span></div>` : "";
 
   const msgHtml = isEnded && s.leader === userName
-    ? `<div class="won-msg">🎉 恭喜！编号 ${s.id} 归你所有<br><span style="font-size:12px;font-weight:400;color:rgba(212,168,83,.8)">请截图此页并联系管理员发放时装</span></div>`
+    ? `<div class="won-msg">🎉 恭喜！#${s.id} 归你所有<br><span style="font-size:12px;font-weight:400;color:rgba(212,168,83,.8)">请截图此页并联系管理员发放时装</span></div>`
     : isEnded && !s.leader
       ? `<div class="no-bid-msg">无人出价</div>` : "";
 
@@ -639,7 +639,7 @@ function renderCard(s) {
       </div>
       <div class="slot-meta">
         <div class="slot-name">${ITEM_NAME}</div>
-        <div class="slot-desc"><span style="color:var(--gold);font-weight:600">编号 ${s.id}</span> · ${ITEM_DESC}</div>
+        <div class="slot-desc"><span style="color:var(--gold);font-weight:600">#${s.id}</span> · ${ITEM_DESC}</div>
       </div>
       ${badge}
     </div>
@@ -689,7 +689,7 @@ function renderOverview(slots) {
     const total = sList.reduce((n, s) => n + s.currentBid, 0);
     const tags = sList
       .sort((a, b) => a.currentBid - b.currentBid)
-      .map(s => `<span class="bidder-slot-tag${isMe?" is-me":""}">编号 ${s.id} ¥${s.currentBid.toLocaleString()}</span>`)
+      .map(s => `<span class="bidder-slot-tag${isMe?" is-me":""}">#${s.id} ¥${s.currentBid.toLocaleString()}</span>`)
       .join("");
     return `<div class="bidder-row${isMe?" is-me":""}">
       <div class="bidder-header">
@@ -781,7 +781,7 @@ function openBidSheet(slotId) {
   const minBid     = noBid ? floorPrice : s.currentBid + 1;
   const defaultAmt = noBid ? floorPrice : s.currentBid + 10;
 
-  $("sh-title").textContent     = `${ITEM_NAME} · 编号 ${slotId}`;
+  $("sh-title").textContent     = `${ITEM_NAME} · #${slotId}`;
   $("sh-cur-bid").textContent   = noBid ? `¥${floorPrice.toLocaleString()}（底价）` : "¥" + s.currentBid.toLocaleString();
   $("sh-leader").textContent    = s.leader || "—";
   $("sh-min-label").textContent = `您的出价（最低 ¥${minBid}）`;
