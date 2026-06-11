@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>全员恶人 · S3万仞飞阳12强 时装拍卖</title>
+<title>全员恶人 · S3万仞12强 时装拍卖</title>
 <style>
 * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
 :root {
@@ -208,7 +208,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; }
   <div class="card-box">
     <div class="badge-label">竞拍配置</div>
     <div style="font-size:18px;font-weight:700;color:var(--gold);letter-spacing:3px;margin-bottom:6px">全员恶人</div>
-    <div style="font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:16px;text-transform:uppercase">S3 万仞飞阳赛区 · 12强</div>
+    <div style="font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:16px;text-transform:uppercase">S3 万仞赛区 · 12强</div>
     <div class="big-emoji" style="animation:trophy-pulse 3s ease-in-out infinite">🏆</div>
     <div class="title">时装拍卖</div>
     <p class="subtitle">璇星曜宇 · 凛夜听霜 / 寒兰浸月<br>共 <strong style="color:var(--gold)">10</strong> 套同时开拍 · 各自独立竞价</p>
@@ -239,7 +239,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; }
 <div id="screen-entry" class="screen" style="display:none">
   <div class="card-box" style="padding:0;overflow:hidden">
     <div class="hero-banner">
-      <div class="hero-season">🏆 S3 · 万仞飞阳赛区</div>
+      <div class="hero-season">🏆 S3 · 万仞赛区</div>
       <div class="hero-club">全员恶人</div>
       <div class="hero-trophy">🏆</div>
       <div class="hero-title">12强 · 时装拍卖</div>
@@ -292,7 +292,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; }
     <div class="sheet-hdr">
       <div style="display:flex;justify-content:center;margin-bottom:10px"><div class="game-icon" style="width:48px;height:48px"></div></div>
       <div class="sheet-title" id="sh-title"></div>
-      <div class="sheet-desc">璇星曜宇 · S3万仞飞阳12强 · 有效期6个月</div>
+      <div class="sheet-desc">璇星曜宇 · S3万仞12强 · 有效期6个月</div>
     </div>
     <div class="current-box">
       <div>
@@ -367,7 +367,7 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 const SLOT_LABELS = ["一","二","三","四","五","六","七","八","九","十"];
 const TOTAL     = 10;
 const ITEM_NAME = "凛夜听霜 / 寒兰浸月";
-const ITEM_DESC = "璇星曜宇 · S3万仞飞阳12强 · 有效期6个月";
+const ITEM_DESC = "璇星曜宇 · S3万仞12强 · 有效期6个月";
 const TBL       = "auction_state";
 const ROW_ID    = 1;
 
@@ -732,7 +732,7 @@ function renderLeaderboard(slots) {
     <button class="lb-copy-btn" id="btn-copy-lb">📋 复制结果文本</button>`;
 
   $("btn-copy-lb").addEventListener("click", () => {
-    const lines = ["【全员恶人 · S3万仞飞阳12强 时装拍卖结果】", "凛夜听霜 / 寒兰浸月 · 璇星曜宇 · 有效期6个月", ""];
+    const lines = ["【全员恶人 · S3万仞12强 时装拍卖结果】", "凛夜听霜 / 寒兰浸月 · 璇星曜宇 · 有效期6个月", ""];
     ended.forEach((s,i) => lines.push(`${i+1}. #${s.id} ${s.leader||"无人出价"} — ¥${s.currentBid.toLocaleString()}`));
     if (ongoing.length > 0) lines.push(`\n（另有 ${ongoing.length} 套进行中）`);
     navigator.clipboard?.writeText(lines.join("\n")).then(() => toast("已复制 ✅")).catch(() => toast("请手动复制"));
