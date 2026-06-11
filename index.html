@@ -809,7 +809,7 @@ function updateConfirm() {
   const s = auctionData?.slots?.find(x => x.id === bidTargetId);
   if (!s) return;
   const floorPrice = auctionData.floorPrice || s.currentBid;
-  const minBid = s.leader ? s.currentBid + 1 : floorPrice;
+  const minBid = s.leader ? s.currentBid + 1 : (auctionData.floorPrice || s.currentBid);
   const amt    = +$("sh-amount").value;
   const ok     = amt >= minBid && !saving;
   $("btn-bid-ok").disabled    = !ok;
@@ -831,7 +831,7 @@ $("btn-bid-ok").addEventListener("click", async () => {
     if (!fresh) { toast("❌ 数据异常，请刷新"); return; }
     const slot = fresh.slots.find(x => x.id === slotId);
     if (!slot || slot.ended || tl(slot.deadline) <= 0) { toast("❌ 该拍卖已结束"); closeBidSheet(); return; }
-    if (amt <= slot.currentBid) {
+    if (amt < slot.currentBid || (!slot.leader && amt < (fresh.floorPrice || slot.currentBid))) {
       toast(`❌ 出价不足，当前最高 ¥${slot.currentBid.toLocaleString()}`);
       // 刷新弹窗内数据
       $("sh-cur-bid").textContent = "¥" + slot.currentBid.toLocaleString();
