@@ -545,11 +545,18 @@ function renderHall() {
   if (myLeading.length) { pl.textContent = "领先 "+myLeading.length; pl.style.display = "inline"; } else pl.style.display = "none";
   if (myWins.length)    { pw.textContent = "🏆"+myWins.length; pw.style.display = "inline"; }       else pw.style.display = "none";
 
+  const bidded   = slots.filter(s => s.leader).length;
+  const noBid    = TOTAL - bidded;
+  const totalSum = slots.reduce((n, s) => n + s.currentBid, 0);
+
   $("statsbar").innerHTML = [
     ["进行中", active.length+"/10"],
+    ["未出价", noBid],
+    ["已出价", bidded],
     ["底价",   "¥"+floorPrice],
     ["出价次数", totalBids],
-    ["最高出价", "¥"+topBid.toLocaleString()]
+    ["最高出价", "¥"+topBid.toLocaleString()],
+    ["总金额", "¥"+totalSum.toLocaleString()]
   ].map(([l,v]) => `<div class="stat-item"><div class="stat-num">${v}</div><div class="stat-label">${l}</div></div>`).join("");
 
   if (showLB) renderLeaderboard(slots);
@@ -560,7 +567,8 @@ function renderHall() {
   const wrap = document.createElement("div");
   wrap.className = "cards"; wrap.id = "cards";
   const sorted = [...slots].sort((a, b) => {
-    if (a.ended !== b.ended) return a.ended ? 1 : -1; // 进行中排前
+    if (a.ended !== b.ended) return a.ended ? 1 : -1; // 进行中排前，已结束沉底
+    if (!!a.leader !== !!b.leader) return a.leader ? 1 : -1; // 未出价排最前
     return a.currentBid - b.currentBid; // 同状态内按价格从低到高
   });
   wrap.innerHTML = sorted.map(s => renderCard(s)).join("");
